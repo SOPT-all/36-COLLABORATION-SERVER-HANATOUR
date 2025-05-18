@@ -5,10 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
+@Table(name ="package")
 public class Package {
 
 	@Id
@@ -31,14 +35,31 @@ public class Package {
 
 	private String description;
 
+	@Setter
 	private String image_url;
 
-
+	@Setter
 	@OneToOne(mappedBy = "packages")
-	private Condition condition;
+	private TourCondition tourCondition;
 
+	@Setter
 	@OneToOne(mappedBy = "packages")
 	private Discount discount;
 
+	public Package(){
 
+	}
+
+	@Builder
+	public Package(String title, String type, String hotel_grade, String companion, Long price, Boolean include_flight,
+		Boolean is_group, String description) {
+		this.title = title;
+		this.type = type;
+		this.hotel_grade = hotel_grade;
+		this.companion = companion;
+		this.price = price;
+		this.include_flight = include_flight;
+		this.is_group = is_group;
+		this.description = description;
+	}
 }
