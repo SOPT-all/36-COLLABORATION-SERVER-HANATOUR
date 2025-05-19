@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -33,6 +34,7 @@ public class Schedule {
 
 	}
 
+	@Builder
 	public Schedule(Package pkg, LocalDateTime departDate, LocalDateTime arriveDate, String arrival, String departure) {
 		this.pkg = pkg;
 		this.departDate = departDate;
