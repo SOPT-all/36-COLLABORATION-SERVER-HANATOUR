@@ -1,6 +1,8 @@
 package sopt.hana.tour.repository;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,4 +38,13 @@ public interface PackageRepository extends JpaRepository<Package, Long> {
     where d.discountType = :discountType
 """)
     List<Package> findPackagesByDiscountType(@Param("discountType") sopt.hana.tour.enums.DiscountType discountType);
+
+
+    @Query("""
+    SELECT p FROM Package p
+    WHERE p.period = :period
+    """)
+    Page<Package> findByPeriod(@Param("period") Long period, Pageable pageable);
+
+
 }
