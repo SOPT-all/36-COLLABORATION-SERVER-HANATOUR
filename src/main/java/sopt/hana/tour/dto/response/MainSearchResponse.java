@@ -44,12 +44,12 @@ public record MainSearchResponse(
 
     public static MainSearchResponse from(Package pkg) {
         TagDto tagDto = null;
-        if (pkg.getTags() != null && !pkg.getTags().isEmpty()) {
-            var tag = pkg.getTags().get(0);
+        if (pkg.getTags() != null) {
+
             tagDto = new TagDto(
-                    tag.getTagName1() != null ? tag.getTagName1().name() : null,
-                    tag.getTagName2() != null ? tag.getTagName2().name() : null,
-                    tag.getTagName3() != null ? tag.getTagName3().name() : null
+                    pkg.getTags().getTagName1() != null ? pkg.getTags().getTagName1().name() : null,
+                    pkg.getTags().getTagName2() != null ?  pkg.getTags().getTagName2().name() : null,
+                    pkg.getTags().getTagName3() != null ?  pkg.getTags().getTagName3().name() : null
             );
         }
 
