@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "condition")
+@Table(name = "tour_condition")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TourCondition {

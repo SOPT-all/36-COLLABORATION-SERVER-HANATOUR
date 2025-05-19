@@ -5,9 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "package")
@@ -44,24 +43,28 @@ public class Package {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "image_url", nullable = false)
+    @Column(name = "image_url", nullable = true)
     private String imageUrl;
 
+    @Setter
     @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
     private TourCondition tourCondition;
 
+    @Setter
     @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
     private Discount discount;
 
+    @Setter
     @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
     private Schedule schedule;
 
-    @OneToMany(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tag> tags = new ArrayList<>();
+    @Setter
+    @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Tag tags;
 
     @Builder
     public Package(String title, String type, String hotelGrade, String companion, Long price,
-                   Boolean includeFlight, Boolean isGroup, String description, String imageUrl) {
+                   Boolean includeFlight, Boolean isGroup, String description) {
         this.title = title;
         this.type = type;
         this.hotelGrade = hotelGrade;
@@ -70,6 +73,5 @@ public class Package {
         this.includeFlight = includeFlight;
         this.isGroup = isGroup;
         this.description = description;
-        this.imageUrl = imageUrl;
     }
 }

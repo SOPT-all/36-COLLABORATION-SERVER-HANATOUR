@@ -47,8 +47,8 @@ public class PackageController {
 
   
 	@PostMapping("/admin/posts")
-	public ResponseEntity<PackageResponse> postPackage(PackageRequest request){
-		return  ResponseEntity.ok(packageService.postPackage(request));
+	public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@RequestBody PackageRequest request){
+		return  ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.",packageService.postPackage(request)));
 	}
 
 
