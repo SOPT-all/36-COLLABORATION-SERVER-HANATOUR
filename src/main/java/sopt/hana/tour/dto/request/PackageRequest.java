@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import org.springframework.lang.NonNull;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record PackageRequest(
 
@@ -20,7 +22,7 @@ public record PackageRequest(
 							 @NotBlank String discountType,
 							 Tags tags,
 							 TourCondition tourCondition,
-							 Schedule schedule,
+							 Schedule schedules,
 							 MultipartFile image
 							 ) {
 
@@ -31,18 +33,17 @@ public record PackageRequest(
 		String tagName3
 	){}
 
-
 	public record TourCondition(
-		@NonNull
-		boolean isFree,
-		@NonNull
-		boolean isChoice,
-		@NonNull
-		boolean isGuide,
-		@NonNull
-		boolean isGuideFee,
-		@NonNull
-		boolean isShop
+		@NotNull
+		Boolean isFree,
+		@NotNull
+		Boolean isChoice,
+		@NotNull
+		Boolean isGuide,
+		@NotNull
+		Boolean isGuideFee,
+		@NotNull
+		Boolean isShop
 	){}
 
 	public record Schedule(
