@@ -1,6 +1,13 @@
 package sopt.hana.tour.enums;
 
 public enum DiscountType {
-    RUN,     // 할인런
-    TIMEDEAL  // 타임특가
-}
+    TIMEDEAL("타임특가"),
+    RUN("타임런");
+
+    private final String discountName;
+
+    DiscountType(String discountName){
+        this.discountName = discountName;
+    }
+
+    }
