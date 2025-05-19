@@ -64,6 +64,9 @@ public class PackageService {
 		Schedule schedule = new Schedule(pkg2,request.schedules().departDate(),request.schedules().arriveDate(),
 			request.schedules().arrival(),request.schedules().departure());
 
+		Long period = schedule.calculatePeriod();
+
+		pkg2.setPeriod(period);
 		pkg2.setSchedule(schedule);
 		pkg2.setTourCondition(tourCondition);
 		pkg2.setDiscount(discount);
