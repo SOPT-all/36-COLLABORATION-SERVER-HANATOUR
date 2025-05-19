@@ -13,7 +13,7 @@ INSERT INTO discount (
     package_id, discount_type
 )
 VALUES (
-           1, 'TIMEDEAL'
+           1, 'RUN'
        );
 
 -- 3. SCHEDULE

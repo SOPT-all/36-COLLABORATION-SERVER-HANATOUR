@@ -28,4 +28,12 @@ public interface PackageRepository extends JpaRepository<Package, Long> {
             @Param("departDate") LocalDateTime departDate,
             @Param("arriveDate") LocalDateTime arriveDate
     );
+
+    @Query("""
+    select distinct p from Package p
+    join fetch p.discount d
+    left join fetch p.tags
+    where d.discountType = :discountType
+""")
+    List<Package> findPackagesByDiscountType(@Param("discountType") sopt.hana.tour.enums.DiscountType discountType);
 }
