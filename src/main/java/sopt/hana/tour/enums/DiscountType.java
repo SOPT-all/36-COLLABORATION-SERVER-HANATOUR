@@ -7,7 +7,8 @@ public enum DiscountType {
     SOUTH("동남아"),
     CHINA("중국"),
     EUROPE("유럽"),
-    RECOMMEND("추천여행");
+    RECOMMEND("추천여행"),
+    MYCOUNTRY("내나라");
 
     private final String discountName;
 

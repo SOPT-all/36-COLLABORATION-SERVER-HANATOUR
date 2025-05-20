@@ -72,6 +72,8 @@ public class PackageService {
 			discountType = DiscountType.EUROPE;
 		}else if(request.getDiscountType().equals("추천여행")) {
 			discountType = DiscountType.RECOMMEND;
+		}else if(request.getDiscountType().equals("내나라")) {
+			discountType = DiscountType.MYCOUNTRY;
 		}else {
 			throw new IllegalArgumentException("잘못된 할인입력입니다.");
 		}

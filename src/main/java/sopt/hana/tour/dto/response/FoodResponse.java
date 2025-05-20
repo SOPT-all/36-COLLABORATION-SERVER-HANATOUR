@@ -5,5 +5,6 @@ public record FoodResponse(String type,
 						   String tag1,
 						   String tag2,
 						   String tag3,
-						   Long price) {
+						   Long price,
+						   String imageUrl) {
 }

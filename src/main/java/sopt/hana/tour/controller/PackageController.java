@@ -105,4 +105,7 @@ public class PackageController {
 		return ResponseEntity.ok(ApiResponse.success(200,"추천여행에 대해서 조회하였습니다.",recommendService.getRecommends()));
 	}
 
+	@Operation(summary = "내나라 조회 API입니다.", description = "Home 페이지에서 내나라 구석구석을 조회할 때 사용하는 API입니다.")
+	public ResponseEntity<ApiResponse<List<>>>
+
 }

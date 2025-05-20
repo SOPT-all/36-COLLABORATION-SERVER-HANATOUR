@@ -21,7 +21,7 @@ public class RecommendService {
 
 		return pkgs.stream()
 			.map(pkg ->{
-				return new RecommendResponse(pkg.getType(),pkg.getTitle()+ " "+pkg.getTags().getTagName1()+ " "+pkg.getTags().getTagName2()+ " "+pkg.getTags().getTagName3(),pkg.getPrice());
+				return new RecommendResponse(pkg.getType(),pkg.getTitle()+ " "+pkg.getTags().getTagName1()+ " "+pkg.getTags().getTagName2()+ " "+pkg.getTags().getTagName3(),pkg.getPrice(),pkg.getImageUrl());
 			}).toList();
 	}
 }

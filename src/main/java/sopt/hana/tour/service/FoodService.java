@@ -35,7 +35,7 @@ public class FoodService {
 
 		return pkgs.stream().
 			map(pkg ->{
-				return new FoodResponse(pkg.getType(),pkg.getTitle(),pkg.getTags().getTagName1(),pkg.getTags().getTagName2(),pkg.getTags().getTagName3(),pkg.getPrice());
+				return new FoodResponse(pkg.getType(),pkg.getTitle(),pkg.getTags().getTagName1(),pkg.getTags().getTagName2(),pkg.getTags().getTagName3(),pkg.getPrice(),pkg.getImageUrl());
 		}).toList();
 
 	}
