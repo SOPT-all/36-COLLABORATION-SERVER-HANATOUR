@@ -15,6 +15,7 @@ import sopt.hana.tour.dto.request.MainSearchRequest;
 import sopt.hana.tour.dto.response.DiscountTimeDealsResponse;
 import sopt.hana.tour.dto.response.FoodResponse;
 import sopt.hana.tour.dto.response.MainSearchResponse;
+import sopt.hana.tour.dto.response.RecommendResponse;
 import sopt.hana.tour.dto.response.SearchFilterResponse;
 import sopt.hana.tour.service.DiscountRunService;
 import sopt.hana.tour.service.DiscountTimeDealsService;
@@ -25,6 +26,8 @@ import sopt.hana.tour.dto.request.PackageRequest;
 import sopt.hana.tour.dto.response.PackageResponse;
 import sopt.hana.tour.service.PackageService;
 import lombok.extern.slf4j.Slf4j;
+import sopt.hana.tour.service.RecommendService;
+
 import java.util.List;
 
 @Slf4j
@@ -39,6 +42,7 @@ public class PackageController {
     private final FilterService filterService;
     private final DiscountTimeDealsService discountTimeDealsService;
 	private final FoodService foodService;
+	private final RecommendService recommendService;
     // 메인페이지 검색 API
 	@Operation(summary = "Home 페이지에서 검색하는 API입니다." , description = "Home 페이지에서 검색을 할 때 사용하는 API입니다.")
 
@@ -97,6 +101,8 @@ public class PackageController {
 
 	//추천 여행 조회 API
 	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
-	public ResponseEntity<ApiResponse<List<>>>
+	public ResponseEntity<ApiResponse<List<RecommendResponse>>> getRecommends(){
+		return ResponseEntity.ok(ApiResponse.success(200,"추천여행에 대해서 조회하였습니다.",recommendService.getRecommends()));
+	}
 
 }
