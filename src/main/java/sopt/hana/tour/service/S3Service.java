@@ -1,10 +1,11 @@
 package sopt.hana.tour.service;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -13,22 +14,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class S3Service {
 
-    private final AmazonS3 amazonS3;
+    private final S3Client s3Client;
     private final String bucketName = "hanatour12-bucket";
 
     public String uploadFile(MultipartFile file) {
         String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(file.getSize());
-        metadata.setContentType(file.getContentType());
-
         try {
-            amazonS3.putObject(bucketName, fileName, file.getInputStream(), metadata);
+            PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(fileName)
+                    .contentType(file.getContentType())
+                    .build();
+
+            s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
         } catch (IOException e) {
             throw new RuntimeException("S3 업로드 실패", e);
         }
 
-        return amazonS3.getUrl(bucketName, fileName).toString();
+        return String.format("https://%s.s3.ap-southeast-2.amazonaws.com/%s", bucketName, fileName);
     }
 }

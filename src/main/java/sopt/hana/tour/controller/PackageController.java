@@ -21,9 +21,10 @@ import sopt.hana.tour.service.MainSearchService;
 import sopt.hana.tour.dto.request.PackageRequest;
 import sopt.hana.tour.dto.response.PackageResponse;
 import sopt.hana.tour.service.PackageService;
-
+import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -61,8 +62,10 @@ public class PackageController {
     @Operation(summary = "패키지 작성 (관리자 전용)", description = "패키지 상품을 등록합니다. 관리자용 기능입니다.")
     @PostMapping("/admin/posts")
     public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@ModelAttribute PackageRequest request) {
-		return  ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.",packageService.postPackage(request)));
-	}
+        log.info("패키지 등록 요청: {}", request.getTitle());
+        log.info("이미지 파일: {}", request.getImage() != null ? request.getImage().getOriginalFilename() : "없음");
+        return ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.", packageService.postPackage(request)));
+    }
 
     //패키지 검색 API
     @Operation(summary = "필터 조건으로 패키지 검색", description = "여행 기간(period)과 페이징 조건을 기반으로 패키지를 검색합니다.")
