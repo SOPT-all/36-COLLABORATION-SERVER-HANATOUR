@@ -7,7 +7,11 @@ public record DiscountTimeDealsResponse(String title,
 												String tagName2,
 												String tagName3,
 												Long price,
-												String imageUrl) {
+												String imageUrl,
+												String bottomTag1,
+												String bottomTag2
+
+) {
 
 
 
