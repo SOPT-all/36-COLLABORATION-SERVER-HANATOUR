@@ -60,13 +60,31 @@ public class PackageService {
 		DiscountType discountType;
 		if (request.getDiscountType().equals("타임특가")) {
 			discountType = DiscountType.TIMEDEAL;
-		} else if (request.getDiscountType().equals("타임런")) {
+		}else if (request.getDiscountType().equals("타임런")) {
 			discountType = DiscountType.RUN;
-		} else {
-			throw new IllegalArgumentException("잘못된 discountType입니다.");
+		}else if(request.getDiscountType().equals("일본")){
+			discountType = DiscountType.JAPAN;
+		}else if(request.getDiscountType().equals("동남아")){
+			discountType = DiscountType.SOUTH;
+		}else if(request.getDiscountType().equals("중국")){
+			discountType = DiscountType.CHINA;
+		}else if(request.getDiscountType().equals("유럽")){
+			discountType = DiscountType.EUROPE;
+		}else if(request.getDiscountType().equals("추천여행")) {
+			discountType = DiscountType.RECOMMEND;
+		}else {
+			throw new IllegalArgumentException("잘못된 할인입력입니다.");
 		}
 
-		Discount discount = new Discount(pkg2, discountType);
+		Discount discount;
+		if(request.getDiscountTag1().isEmpty() && request.getDiscountTag1().isBlank()){
+			discount = new Discount(pkg2, discountType);
+		}else{
+			discount = new Discount(pkg2,discountType,request.getDiscountTag1(), request.getDiscountTag2());
+		}
+
+
+
 		Tag tags = Tag.toEntity(pkg2, request);
 
 		Schedule schedule = new Schedule(pkg2,
