@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,8 @@ public class PackageController {
     private final DiscountTimeDealsService discountTimeDealsService;
 
     // 메인페이지 검색 API
-    @Operation(summary = "메인 페이지 검색", description = "출발지, 도착지, 출발일자, 도착일자 기준으로 패키지를 검색합니다.")
+	@Operation(summary = "Home 페이지에서 검색하는 API입니다." , description = "Home 페이지에서 검색을 할 때 사용하는 API입니다.")
+
     @PostMapping("/packages/search")
     public ResponseEntity<ApiResponse<List<MainSearchResponse>>> searchPackages(
             @RequestBody @Valid MainSearchRequest request
@@ -49,7 +51,8 @@ public class PackageController {
     }
 
     //할인런 조회 API
-    @Operation(summary = "할인런 패키지 조회", description = "DiscountType이 RUN인 패키지를 조회합니다.")
+	@Operation(summary = "할인런 조회 API입니다.", description = "Home 페이지에서 할인런을 조회할 때 사용하는 API입니다.")
+
     @GetMapping("/packages/discount-run")
     public ResponseEntity<ApiResponse<?>> getRunDiscountPackages() {
         return ResponseEntity.ok(
@@ -59,25 +62,23 @@ public class PackageController {
 
 
     //관리자용 패키지 작성 API
-    @Operation(summary = "패키지 작성 (관리자 전용)", description = "패키지 상품을 등록합니다. 관리자용 기능입니다.")
-    @PostMapping("/admin/posts")
-    public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@ModelAttribute PackageRequest request) {
-        log.info("패키지 등록 요청: {}", request.getTitle());
-        log.info("이미지 파일: {}", request.getImage() != null ? request.getImage().getOriginalFilename() : "없음");
-        return ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.", packageService.postPackage(request)));
-    }
+	@Operation(summary = "관리자용으로 데이터를 추가하기 위해 사용하는 API입니다.")
+	@PostMapping("/admin/posts")
+	public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@RequestBody PackageRequest request){
+		return  ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.",packageService.postPackage(request)));
+	}
 
     //패키지 검색 API
-    @Operation(summary = "필터 조건으로 패키지 검색", description = "여행 기간(period)과 페이징 조건을 기반으로 패키지를 검색합니다.")
+	  @Operation(summary = "여행기간으로 패키지를 검색하는 API입니다.",description = "여행기간을 입력받고, pageable이기에 page 값과 size값을 입력받아서 제공해줍니다. default값으로 page = 0, size = 0입니다.")
     @GetMapping("/packages/filter")
     public ResponseEntity<ApiResponse<SearchFilterResponse>> getSearch(@RequestParam Long period,
-        @PageableDefault(page = 0, size = 20)
+		@ParameterObject @PageableDefault(page = 0, size = 20)
         Pageable pageable){
         return ResponseEntity.ok(ApiResponse.success(200,"패키지 검색결과입니다.",filterService.getSearchFilter(period,pageable)));
     }
 
     //타임특가 조회 API
-    @Operation(summary = "타임특가 패키지 조회", description = "DiscountType이 TIMEDEAL인 패키지를 조회합니다.")
+	  @Operation(summary = "타임특가 조회 API입니다.", description = "Home 페이지에서 타임특가를 조회할 때 사용하는 API입니다.")
     @GetMapping("/packages/discount-timedeals")
     public ResponseEntity<ApiResponse<List<DiscountTimeDealsResponse>>> getTimeDeals(){
         return ResponseEntity.ok(ApiResponse.success(200,"타임특가 패키지가 조회되었습니다.",discountTimeDealsService.getTimeDeals()));
