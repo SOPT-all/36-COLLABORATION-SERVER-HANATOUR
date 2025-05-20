@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import sopt.hana.tour.common.response.ApiResponse;
 import sopt.hana.tour.dto.request.MainSearchRequest;
 import sopt.hana.tour.dto.response.DiscountTimeDealsResponse;
+import sopt.hana.tour.dto.response.FoodResponse;
 import sopt.hana.tour.dto.response.MainSearchResponse;
 import sopt.hana.tour.dto.response.SearchFilterResponse;
 import sopt.hana.tour.service.DiscountRunService;
 import sopt.hana.tour.service.DiscountTimeDealsService;
 import sopt.hana.tour.service.FilterService;
+import sopt.hana.tour.service.FoodService;
 import sopt.hana.tour.service.MainSearchService;
 import sopt.hana.tour.dto.request.PackageRequest;
 import sopt.hana.tour.dto.response.PackageResponse;
@@ -36,7 +38,7 @@ public class PackageController {
     private final DiscountRunService discountRunService;
     private final FilterService filterService;
     private final DiscountTimeDealsService discountTimeDealsService;
-
+	private final FoodService foodService;
     // 메인페이지 검색 API
 	@Operation(summary = "Home 페이지에서 검색하는 API입니다." , description = "Home 페이지에서 검색을 할 때 사용하는 API입니다.")
 
@@ -69,7 +71,7 @@ public class PackageController {
 	}
 
     //패키지 검색 API
-	  @Operation(summary = "여행기간으로 패키지를 검색하는 API입니다.",description = "여행기간을 입력받고, pageable이기에 page 값과 size값을 입력받아서 제공해줍니다. default값으로 page = 0, size = 0입니다.")
+    @Operation(summary = "여행기간으로 패키지를 검색하는 API입니다.",description = "여행기간을 입력받고, pageable이기에 page 값과 size값을 입력받아서 제공해줍니다. default값으로 page = 0, size = 0입니다.")
     @GetMapping("/packages/filter")
     public ResponseEntity<ApiResponse<SearchFilterResponse>> getSearch(@RequestParam Long period,
 		@ParameterObject @PageableDefault(page = 0, size = 20)
@@ -78,10 +80,23 @@ public class PackageController {
     }
 
     //타임특가 조회 API
-	  @Operation(summary = "타임특가 조회 API입니다.", description = "Home 페이지에서 타임특가를 조회할 때 사용하는 API입니다.")
+    @Operation(summary = "타임특가 조회 API입니다.", description = "Home 페이지에서 타임특가를 조회할 때 사용하는 API입니다.")
     @GetMapping("/packages/discount-timedeals")
     public ResponseEntity<ApiResponse<List<DiscountTimeDealsResponse>>> getTimeDeals(){
         return ResponseEntity.ok(ApiResponse.success(200,"타임특가 패키지가 조회되었습니다.",discountTimeDealsService.getTimeDeals()));
     }
+
+
+	//미식탐방 조회 API
+	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
+	@GetMapping("/packages")
+	public ResponseEntity<ApiResponse<List<FoodResponse>>> getFoods(@RequestParam String country){
+
+		return ResponseEntity.ok(ApiResponse.success(200,country + "미식탐방이 조회되었습다.",foodService.getFoods(country)));
+	}
+
+	//추천 여행 조회 API
+	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
+	public ResponseEntity<ApiResponse<List<>>>
 
 }

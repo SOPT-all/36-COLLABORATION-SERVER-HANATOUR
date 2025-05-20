@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sopt.hana.tour.dto.request.PackageRequest;
-import sopt.hana.tour.enums.TagName;
-
 
 @Entity
 @Table(name = "tag")
