@@ -105,12 +105,14 @@ public class PackageController {
 
 	//추천 여행 조회 API
 	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
+	@GetMapping("/foods")
 	public ResponseEntity<ApiResponse<List<RecommendResponse>>> getRecommends(){
 		return ResponseEntity.ok(ApiResponse.success(200,"추천여행에 대해서 조회하였습니다.",recommendService.getRecommends()));
 	}
 
 	//내 나라 조회 API
 	@Operation(summary = "내나라 조회 API입니다.", description = "Home 페이지에서 내나라 구석구석을 조회할 때 사용하는 API입니다.")
+	@GetMapping("/my")
 	public ResponseEntity<ApiResponse<List<MyCountryResponse>>> getMyCountry(){
 		return ResponseEntity.ok(ApiResponse.success(200,"내나라에 대해서 조회하였습니다.",myCountryService.getMyCountry()));
 	}
