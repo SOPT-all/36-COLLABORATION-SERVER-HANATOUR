@@ -31,9 +31,9 @@ public class FilterService {
 				pkg.getDescription(),
 				pkg.getDiscount() != null ? pkg.getDiscount().getDiscountType().name() : null,
 				new SearchFilterResponse.SearchResponse.Tags(
-					pkg.getTags() != null && pkg.getTags().getTagName1() != null ? pkg.getTags().getTagName1().name() : null,
-					pkg.getTags() != null && pkg.getTags().getTagName2() != null ? pkg.getTags().getTagName2().name() : null,
-					pkg.getTags() != null && pkg.getTags().getTagName3() != null ? pkg.getTags().getTagName3().name() : null
+					pkg.getTags() != null && pkg.getTags().getTagName1() != null ? pkg.getTags().getTagName1() : null,
+					pkg.getTags() != null && pkg.getTags().getTagName2() != null ? pkg.getTags().getTagName2() : null,
+					pkg.getTags() != null && pkg.getTags().getTagName3() != null ? pkg.getTags().getTagName3() : null
 				),
 				new SearchFilterResponse.SearchResponse.TourCondition(
 					pkg.getTourCondition() != null ? pkg.getTourCondition().getIsFree() : null,
