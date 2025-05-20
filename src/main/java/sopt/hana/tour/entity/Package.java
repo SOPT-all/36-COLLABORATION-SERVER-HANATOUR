@@ -47,6 +47,10 @@ public class Package {
     private String imageUrl;
 
     @Setter
+    @Column(name = "period",nullable = false)
+    private Long period;
+
+    @Setter
     @OneToOne(mappedBy = "pkg", cascade = CascadeType.ALL, orphanRemoval = true)
     private TourCondition tourCondition;
 

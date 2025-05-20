@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "schedule")
@@ -44,4 +45,9 @@ public class Schedule {
         this.departure = departure;
         this.arrival = arrival;
     }
+
+    public Long calculatePeriod() {
+        return ChronoUnit.DAYS.between(this.departDate.toLocalDate(), this.arriveDate.toLocalDate()) + 1;
+    }
+
 }
