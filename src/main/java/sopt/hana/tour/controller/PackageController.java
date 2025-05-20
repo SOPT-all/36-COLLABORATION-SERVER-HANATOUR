@@ -60,7 +60,7 @@ public class PackageController {
     //관리자용 패키지 작성 API
     @Operation(summary = "패키지 작성 (관리자 전용)", description = "패키지 상품을 등록합니다. 관리자용 기능입니다.")
     @PostMapping("/admin/posts")
-	public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@RequestBody PackageRequest request){
+    public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@ModelAttribute PackageRequest request) {
 		return  ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.",packageService.postPackage(request)));
 	}
 
