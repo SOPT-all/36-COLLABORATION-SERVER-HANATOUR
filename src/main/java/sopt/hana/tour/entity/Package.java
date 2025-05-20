@@ -43,6 +43,7 @@ public class Package {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Setter
     @Column(name = "image_url", nullable = true)
     private String imageUrl;
 
