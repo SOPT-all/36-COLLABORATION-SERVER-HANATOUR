@@ -37,30 +37,30 @@ public class PackageService {
 	public PackageResponse postPackage(PackageRequest request){
 
 		Package pkg2 = Package.builder()
-				.title(request.title())
-				.type(request.type())
-				.hotelGrade(request.hotelGrade())
-				.companion(request.companion())
-				.price(request.price())
-				.includeFlight(request.includeFlight())
-				.isGroup(request.isGroup())
-				.description(request.description())
+				.title(request.getTitle())
+				.type(request.getType())
+				.hotelGrade(request.getHotelGrade())
+				.companion(request.getCompanion())
+				.price(request.getPrice())
+				.includeFlight(request.getIncludeFlight())
+				.isGroup(request.getIsGroup())
+				.description(request.getDescription())
 				.build();
 
-		String imageUrl = s3Service.uploadFile(request.image());
+		String imageUrl = s3Service.uploadFile(request.getImage());
 		pkg2.setImageUrl(imageUrl);
 
 		TourCondition tourCondition = new TourCondition(pkg2,
-				request.tourCondition().isFree(),
-				request.tourCondition().isChoice(),
-				request.tourCondition().isGuide(),
-				request.tourCondition().isGuideFee(),
-				request.tourCondition().isShop());
+				request.getTourCondition().getIsFree(),
+				request.getTourCondition().getIsChoice(),
+				request.getTourCondition().getIsGuide(),
+				request.getTourCondition().getIsGuideFee(),
+				request.getTourCondition().getIsShop());
 
 		DiscountType discountType;
-		if (request.discountType().equals("타임특가")) {
+		if (request.getDiscountType().equals("타임특가")) {
 			discountType = DiscountType.TIMEDEAL;
-		} else if (request.discountType().equals("타임런")) {
+		} else if (request.getDiscountType().equals("타임런")) {
 			discountType = DiscountType.RUN;
 		} else {
 			throw new IllegalArgumentException("잘못된 discountType입니다.");
@@ -70,10 +70,10 @@ public class PackageService {
 		Tag tags = Tag.toEntity(pkg2, request);
 
 		Schedule schedule = new Schedule(pkg2,
-				request.schedules().departDate(),
-				request.schedules().arriveDate(),
-				request.schedules().arrival(),
-				request.schedules().departure());
+				request.getSchedules().getDepartDate(),
+				request.getSchedules().getArriveDate(),
+				request.getSchedules().getArrival(),
+				request.getSchedules().getDeparture());
 
 		Long period = schedule.calculatePeriod();
 		pkg2.setPeriod(period);
