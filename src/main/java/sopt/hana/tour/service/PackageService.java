@@ -100,9 +100,9 @@ public class PackageService {
 				pkg2.getDescription(),
 				pkg2.getDiscount().getDiscountType().toString(),
 				new PackageResponse.Tags(
-						tags.getTagName1().toString(),
-						tags.getTagName2().toString(),
-						tags.getTagName3().toString()
+						tags.getTagName1(),
+						tags.getTagName2(),
+						tags.getTagName3()
 				),
 				new PackageResponse.TourCondition(
 						tourCondition.getIsFree(),

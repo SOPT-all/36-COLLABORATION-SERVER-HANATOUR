@@ -27,23 +27,20 @@ public class Tag {
     private Package pkg;
 
     @Setter
-    @Enumerated(EnumType.STRING)
     @Column(name = "tag_name1")
-    private TagName tagName1;
+    private String tagName1;
 
     @Setter
-    @Enumerated(EnumType.STRING)
     @Column(name = "tag_name2")
-    private TagName tagName2;
+    private String tagName2;
 
     @Setter
-    @Enumerated(EnumType.STRING)
     @Column(name = "tag_name3")
-    private TagName tagName3;
+    private String tagName3;
 
 
     @Builder
-    public Tag(Package pkg, TagName tagName1, TagName tagName2, TagName tagName3) {
+    public Tag(Package pkg, String tagName1, String tagName2, String tagName3) {
         this.pkg = pkg;
         this.tagName1 = tagName1;
         this.tagName2 = tagName2;
@@ -56,15 +53,15 @@ public class Tag {
         tag.setPkg(pkg);
 
         if (request.getTags() != null && request.getTags().getTagName1() != null && !request.getTags().getTagName1().isBlank()) {
-            tag.setTagName1(TagName.from(request.getTags().getTagName1()));
+            tag.setTagName1(request.getTags().getTagName1());
         }
 
         if (request.getTags() != null && request.getTags().getTagName2() != null && !request.getTags().getTagName2().isBlank()) {
-            tag.setTagName2(TagName.from(request.getTags().getTagName2()));
+            tag.setTagName2(request.getTags().getTagName2());
         }
 
         if (request.getTags() != null && request.getTags().getTagName3() != null && !request.getTags().getTagName3().isBlank()) {
-            tag.setTagName3(TagName.from(request.getTags().getTagName3()));
+            tag.setTagName3(request.getTags().getTagName3());
         }
 
         return tag;

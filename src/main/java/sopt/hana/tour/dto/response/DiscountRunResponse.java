@@ -16,9 +16,9 @@ public record DiscountRunResponse(
 
         return new DiscountRunResponse(
             pkg.getTitle(),
-            tag != null && tag.getTagName1() != null ? tag.getTagName1().name() : null,
-            tag != null && tag.getTagName2() != null ? tag.getTagName2().name() : null,
-            tag != null && tag.getTagName3() != null ? tag.getTagName3().name() : null,
+            tag != null && tag.getTagName1() != null ? tag.getTagName1() : null,
+            tag != null && tag.getTagName2() != null ? tag.getTagName2() : null,
+            tag != null && tag.getTagName3() != null ? tag.getTagName3() : null,
             pkg.getPrice(),
             pkg.getImageUrl()
         );

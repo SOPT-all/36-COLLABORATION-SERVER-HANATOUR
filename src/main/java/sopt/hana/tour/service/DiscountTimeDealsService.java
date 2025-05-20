@@ -21,7 +21,7 @@ public class DiscountTimeDealsService {
 		List<Package> packages = packageRepository.findPackagesByDiscountType(DiscountType.TIMEDEAL);
 
 		return packages.stream().map(pkg->
-			new DiscountTimeDealsResponse(pkg.getTitle(),pkg.getTags().getTagName1().toString(),pkg.getTags().getTagName2().toString(),pkg.getTags().getTagName3().toString(),
+			new DiscountTimeDealsResponse(pkg.getTitle(),pkg.getTags().getTagName1(),pkg.getTags().getTagName2(),pkg.getTags().getTagName3(),
 				pkg.getPrice(),pkg.getImageUrl())).toList();
 	}
 

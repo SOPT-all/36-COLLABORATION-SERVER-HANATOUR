@@ -47,9 +47,9 @@ public record MainSearchResponse(
         if (pkg.getTags() != null) {
 
             tagDto = new TagDto(
-                    pkg.getTags().getTagName1() != null ? pkg.getTags().getTagName1().name() : null,
-                    pkg.getTags().getTagName2() != null ?  pkg.getTags().getTagName2().name() : null,
-                    pkg.getTags().getTagName3() != null ?  pkg.getTags().getTagName3().name() : null
+                    pkg.getTags().getTagName1() != null ? pkg.getTags().getTagName1() : null,
+                    pkg.getTags().getTagName2() != null ?  pkg.getTags().getTagName2() : null,
+                    pkg.getTags().getTagName3() != null ?  pkg.getTags().getTagName3() : null
             );
         }
 
