@@ -1,57 +1,85 @@
 package sopt.hana.tour.dto.request;
 
-import java.time.LocalDateTime;
-
-import org.springframework.lang.NonNull;
-import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
-public record PackageRequest(
+import java.time.LocalDateTime;
 
-							 @NotBlank String title,
-							 @NotBlank String type,
-							 @NotBlank String hotelGrade,
-							 @NotBlank String companion,
-							 @NonNull Long price,
-							 @NonNull Boolean includeFlight,
-							 @NonNull Boolean isGroup,
-							 @NotBlank String description,
-							 @NotBlank String discountType,
-							 Tags tags,
-							 TourCondition tourCondition,
-							 Schedule schedules,
-							 MultipartFile image
-							 ) {
+@Getter
+@Setter
+public class PackageRequest {
 
+	@NotBlank
+	private String title;
 
-	public record Tags(
-		String tagName1,
-		String tagName2,
-		String tagName3
-	){}
+	@NotBlank
+	private String type;
 
-	public record TourCondition(
+	@NotBlank
+	private String hotelGrade;
+
+	@NotBlank
+	private String companion;
+
+	@NotNull
+	private Long price;
+
+	@NotNull
+	private Boolean includeFlight;
+
+	@NotNull
+	private Boolean isGroup;
+
+	@NotBlank
+	private String description;
+
+	@NotBlank
+	private String discountType;
+
+	@NotNull
+	private Tags tags;
+
+	@NotNull
+	private TourCondition tourCondition;
+
+	@NotNull
+	private Schedule schedules;
+
+	@NotNull
+	private MultipartFile image;
+
+	@Getter
+	@Setter
+	public static class Tags {
+		private String tagName1;
+		private String tagName2;
+		private String tagName3;
+	}
+
+	@Getter
+	@Setter
+	public static class TourCondition {
 		@NotNull
-		Boolean isFree,
+		private Boolean isFree;
 		@NotNull
-		Boolean isChoice,
+		private Boolean isChoice;
 		@NotNull
-		Boolean isGuide,
+		private Boolean isGuide;
 		@NotNull
-		Boolean isGuideFee,
+		private Boolean isGuideFee;
 		@NotNull
-		Boolean isShop
-	){}
+		private Boolean isShop;
+	}
 
-	public record Schedule(
-		LocalDateTime departDate,
-		LocalDateTime arriveDate,
-		String departure,
-		String arrival
-	) {}
-
+	@Getter
+	@Setter
+	public static class Schedule {
+		private LocalDateTime departDate;
+		private LocalDateTime arriveDate;
+		private String departure;
+		private String arrival;
+	}
 }
-

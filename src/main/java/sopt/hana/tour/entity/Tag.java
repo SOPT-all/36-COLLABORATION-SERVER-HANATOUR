@@ -55,20 +55,21 @@ public class Tag {
         Tag tag = new Tag();
         tag.setPkg(pkg);
 
-        if (request.tags().tagName1() != null && !request.tags().tagName1().isBlank()) {
-            tag.setTagName1(TagName.from(request.tags().tagName1()));
+        if (request.getTags() != null && request.getTags().getTagName1() != null && !request.getTags().getTagName1().isBlank()) {
+            tag.setTagName1(TagName.from(request.getTags().getTagName1()));
         }
 
-        if (request.tags().tagName2() != null && !request.tags().tagName2().isBlank()) {
-            tag.setTagName2(TagName.from(request.tags().tagName2()));
+        if (request.getTags() != null && request.getTags().getTagName2() != null && !request.getTags().getTagName2().isBlank()) {
+            tag.setTagName2(TagName.from(request.getTags().getTagName2()));
         }
 
-        if (request.tags().tagName3() != null && !request.tags().tagName3().isBlank()) {
-            tag.setTagName3(TagName.from(request.tags().tagName3()));
+        if (request.getTags() != null && request.getTags().getTagName3() != null && !request.getTags().getTagName3().isBlank()) {
+            tag.setTagName3(TagName.from(request.getTags().getTagName3()));
         }
 
         return tag;
     }
+
 
 }
 
