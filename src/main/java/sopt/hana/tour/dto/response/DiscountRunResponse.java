@@ -9,7 +9,9 @@ public record DiscountRunResponse(
     String tagName2,
     String tagName3,
     Long price,
-    String imageUrl
+    String imageUrl,
+    String bottomTag1,
+    String bottomTag2
 ) {
     public static DiscountRunResponse from(Package pkg) {
         Tag tag = pkg.getTags();
@@ -20,7 +22,9 @@ public record DiscountRunResponse(
             tag != null && tag.getTagName2() != null ? tag.getTagName2() : null,
             tag != null && tag.getTagName3() != null ? tag.getTagName3() : null,
             pkg.getPrice(),
-            pkg.getImageUrl()
+            pkg.getImageUrl(),
+            pkg.getDiscount().getDiscountTag1(),
+            pkg.getDiscount().getDiscountTag2()
         );
     }
 }

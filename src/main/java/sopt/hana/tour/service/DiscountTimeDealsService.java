@@ -22,7 +22,7 @@ public class DiscountTimeDealsService {
 
 		return packages.stream().map(pkg->
 			new DiscountTimeDealsResponse(pkg.getTitle(),pkg.getTags().getTagName1(),pkg.getTags().getTagName2(),pkg.getTags().getTagName3(),
-				pkg.getPrice(),pkg.getImageUrl())).toList();
+				pkg.getPrice(),pkg.getImageUrl(),pkg.getDiscount().getDiscountTag1(),pkg.getDiscount().getDiscountTag2())).toList();
 	}
 
 }

@@ -39,6 +39,9 @@ public class PackageRequest {
 	@NotBlank
 	private String discountType;
 
+	private String discountTag1;
+	private String discountTag2;
+
 	@NotNull
 	private Tags tags;
 
