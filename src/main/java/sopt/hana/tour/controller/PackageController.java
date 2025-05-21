@@ -8,8 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import sopt.hana.tour.common.response.ApiResponse;
 import sopt.hana.tour.dto.request.MainSearchRequest;
 import sopt.hana.tour.dto.response.DiscountTimeDealsResponse;
@@ -73,8 +76,8 @@ public class PackageController {
 
     //관리자용 패키지 작성 API
 	@Operation(summary = "관리자용으로 데이터를 추가하기 위해 사용하는 API입니다.")
-	@PostMapping("/admin/posts")
-	public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@RequestBody PackageRequest request){
+	@PostMapping(value = "/admin/posts", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<ApiResponse<PackageResponse>> postPackage(@ModelAttribute PackageRequest request){
 		return  ResponseEntity.ok(ApiResponse.success(201,"패키지가 작성되었습니다.",packageService.postPackage(request)));
 	}
 
@@ -97,15 +100,14 @@ public class PackageController {
 
 	//미식탐방 조회 API
 	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
-	@GetMapping("/packages")
+	@GetMapping("/foods")
 	public ResponseEntity<ApiResponse<List<FoodResponse>>> getFoods(@RequestParam String country){
-
 		return ResponseEntity.ok(ApiResponse.success(200,country + "미식탐방이 조회되었습다.",foodService.getFoods(country)));
 	}
 
 	//추천 여행 조회 API
-	@Operation(summary = "미식탐방 조회 API입니다.", description = "Home 페이지에서 미식탐방을 조회할 때 사용하는 API입니다.")
-	@GetMapping("/foods")
+	@Operation(summary = "추천 여행 조회 API입니다.", description = "Home 페이지에서 추천여행을 조회할 때 사용하는 API입니다.")
+	@GetMapping("/recommend")
 	public ResponseEntity<ApiResponse<List<RecommendResponse>>> getRecommends(){
 		return ResponseEntity.ok(ApiResponse.success(200,"추천여행에 대해서 조회하였습니다.",recommendService.getRecommends()));
 	}

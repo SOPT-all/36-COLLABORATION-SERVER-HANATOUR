@@ -14,11 +14,10 @@ public record MainSearchRequest(
     @Schema(description = "도착지", example = "부산")
     String arrival,
 
-    @NotNull(message = "출발일시")
+
     @Schema(description = "출발일시", example = "2025-06-01T09:00:00")
     LocalDateTime departDate,
 
-    @NotNull(message = "도착일시")
     @Schema(description = "도착일시", example = "2025-06-05T20:00:00")
     LocalDateTime arriveDate,
 
