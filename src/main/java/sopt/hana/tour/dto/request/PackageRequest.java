@@ -51,7 +51,6 @@ public class PackageRequest {
 	@NotNull
 	private Schedule schedules;
 
-	@NotNull
 	private MultipartFile image;
 
 	@Getter
