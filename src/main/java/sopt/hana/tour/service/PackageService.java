@@ -80,7 +80,7 @@ public class PackageService {
 		}
 
 		Discount discount;
-		if(request.getDiscountTag1().isEmpty() && request.getDiscountTag1().isBlank()){
+		if (request.getDiscountTag1() == null || request.getDiscountTag1().isBlank()) {
 			discount = new Discount(pkg2, discountType);
 		}else{
 			discount = new Discount(pkg2,discountType,request.getDiscountTag1(), request.getDiscountTag2());

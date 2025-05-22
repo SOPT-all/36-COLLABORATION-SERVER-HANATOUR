@@ -25,7 +25,9 @@ public class S3Service {
                     .bucket(bucketName)
                     .key(fileName)
                     .contentType(file.getContentType())
+                    .acl("public-read")
                     .build();
+
 
             s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
         } catch (IOException e) {
