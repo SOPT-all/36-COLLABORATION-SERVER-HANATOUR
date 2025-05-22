@@ -61,6 +61,7 @@ public class PackageService {
 		DiscountType discountType;
 		String inputType = request.getDiscountType();
 
+
 		if (inputType == null || inputType.isBlank()) {
 			discountType = DiscountType.NONE;
 		} else if (inputType.equals("타임특가")) {
@@ -79,9 +80,12 @@ public class PackageService {
 			discountType = DiscountType.RECOMMEND;
 		} else if (inputType.equals("내나라")) {
 			discountType = DiscountType.MYCOUNTRY;
+		} else if (inputType.equals("할인없음") || inputType.equals("NONE")) {
+			discountType = DiscountType.NONE;
 		} else {
 			throw new IllegalArgumentException("잘못된 할인입력입니다.");
 		}
+
 
 		Discount discount;
 		if (request.getDiscountTag1() == null || request.getDiscountTag1().isBlank()) {
