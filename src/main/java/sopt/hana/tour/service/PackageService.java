@@ -59,23 +59,27 @@ public class PackageService {
 				request.getTourCondition().getIsShop());
 
 		DiscountType discountType;
-		if (request.getDiscountType().equals("타임특가")) {
+		String inputType = request.getDiscountType();
+
+		if (inputType == null || inputType.isBlank()) {
+			discountType = DiscountType.NONE;
+		} else if (inputType.equals("타임특가")) {
 			discountType = DiscountType.TIMEDEAL;
-		}else if (request.getDiscountType().equals("타임런")) {
+		} else if (inputType.equals("타임런")) {
 			discountType = DiscountType.RUN;
-		}else if(request.getDiscountType().equals("일본")){
+		} else if (inputType.equals("일본")) {
 			discountType = DiscountType.JAPAN;
-		}else if(request.getDiscountType().equals("동남아")){
+		} else if (inputType.equals("동남아")) {
 			discountType = DiscountType.SOUTH;
-		}else if(request.getDiscountType().equals("중국")){
+		} else if (inputType.equals("중국")) {
 			discountType = DiscountType.CHINA;
-		}else if(request.getDiscountType().equals("유럽")){
+		} else if (inputType.equals("유럽")) {
 			discountType = DiscountType.EUROPE;
-		}else if(request.getDiscountType().equals("추천여행")) {
+		} else if (inputType.equals("추천여행")) {
 			discountType = DiscountType.RECOMMEND;
-		}else if(request.getDiscountType().equals("내나라")) {
+		} else if (inputType.equals("내나라")) {
 			discountType = DiscountType.MYCOUNTRY;
-		}else {
+		} else {
 			throw new IllegalArgumentException("잘못된 할인입력입니다.");
 		}
 

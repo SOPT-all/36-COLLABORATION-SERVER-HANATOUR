@@ -8,7 +8,8 @@ public enum DiscountType {
     CHINA("중국"),
     EUROPE("유럽"),
     RECOMMEND("추천여행"),
-    MYCOUNTRY("내나라");
+    MYCOUNTRY("내나라"),
+    NONE("할인없음");
 
     private final String discountName;
 
